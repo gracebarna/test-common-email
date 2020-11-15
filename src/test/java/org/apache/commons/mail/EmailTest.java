@@ -379,6 +379,18 @@ public class EmailTest {
 			assertEquals(new Date(email.sentDate.getTime()), email.getSentDate());
 			
 		}
+		
+		//test the "from" email 
+		@Test
+		public void testSetFrom() throws Exception {
+			
+			email.setFrom("test1@test.com");
+			
+			assertEquals("test1@test.com", email.fromAddress);
+		
+			
+			
+		}
 	
 	
 	
