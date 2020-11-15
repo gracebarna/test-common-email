@@ -95,6 +95,31 @@ public class EmailTest {
 		
 	}
 	
+
+	//test addCc method
+    //assert that the size of emails added is the same as expected
+	//3 emails expected in this case
+	@Test
+	public void testAddCc() throws Exception {
+				
+		email.addCc(TEST_CC);
+				
+		assertEquals(3, email.getCcAddresses().size());
+				
+	}
+
+	//Expect EmailException when there are no emails
+	@Test(expected = EmailException.class)
+	public void testAddCcEmailException() throws Exception {
+			
+		email.addCc(TESTNULL);
+				
+	}
+	
+	
+		
+		
+	
 	
 	
 }
