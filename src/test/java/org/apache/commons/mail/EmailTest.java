@@ -351,6 +351,18 @@ public class EmailTest {
 			assertEquals(expectedProperties.setProperty(email.MAIL_PORT, email.smtpPort), email.getMailSession());
 			
 		}
+		
+		//test the socket connection timeout
+		@Test
+		public void testGetSocketConnectionTimeout() throws Exception {
+			
+			int expectedTimeout = 10;
+			email.setSocketConnectionTimeout(10);
+			int actualTimeout = email.getSocketConnectionTimeout();
+			
+			assertTrue(expectedTimeout == actualTimeout);
+			
+		}
 
 	
 	
