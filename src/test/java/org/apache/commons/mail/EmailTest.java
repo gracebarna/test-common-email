@@ -158,6 +158,19 @@ public class EmailTest {
 		}
 	
 		
+		//test addReplyTo method
+		//add "reply to" information, check to see that information is added
+	    //3 added in this case
+		@Test
+		public void testAddReplyTo() throws Exception {
+			
+			email.addReplyTo("test1@test.com", "name1");
+			email.addReplyTo("test2@test.com", "name2");
+			email.addReplyTo("test3@test.com", "name3");
+			
+			assertEquals(3, email.replyList.size());
+		}
+		
 		
 	
 	
