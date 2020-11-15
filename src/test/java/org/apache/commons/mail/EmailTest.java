@@ -331,6 +331,27 @@ public class EmailTest {
 		}
 		
 		
+		//Expect EmailException in get mail session method
+		@Test(expected = EmailException.class)
+		public void testGetMailSessionEmailException() throws Exception {
+		
+			email.getMailSession();
+			
+		}
+		
+		
+		//testing mail session for the expected properties
+		@Test
+		public void testGetMailSession() throws Exception {
+		
+			Properties expectedProperties = new Properties();
+			
+			expectedProperties.setProperty(email.MAIL_PORT, email.smtpPort);
+			
+			assertEquals(expectedProperties.setProperty(email.MAIL_PORT, email.smtpPort), email.getMailSession());
+			
+		}
+
 	
 	
 	
