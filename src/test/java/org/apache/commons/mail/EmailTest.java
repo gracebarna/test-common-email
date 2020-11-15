@@ -171,6 +171,152 @@ public class EmailTest {
 			assertEquals(3, email.replyList.size());
 		}
 		
+		//test build mime message
+		//test that the "from" email works as expected
+		//test that the subject of the message works as expected
+		@Test
+		public void testBuildMimeMessage() throws Exception {
+			
+			
+			email.setHostName("host1");
+			email.setSmtpPort(8080);
+			
+			email.setFrom("test@test.com");
+			email.addTo("toTest@test.com");
+			email.setSubject("test mail");
+			email.setSslSmtpPort("port1");
+			email.setBounceAddress("testBounce@test.com");
+			
+			final String headerValue = "1212121212";
+			email.addHeader("header", headerValue);
+			 
+			email.buildMimeMessage();
+			
+			MimeMessage msg = email.getMimeMessage();
+			msg.saveChanges();
+			
+			
+			Address[] fromMsg= msg.getFrom();
+			String subjectMsg = msg.getSubject();
+			
+			
+			assertEquals(fromMsg, "test@test.com");
+			assertEquals(subjectMsg, "test mail");
+			
+		}
+		
+		//test build mime message
+		//test that the "from" email works as expected when null
+		@Test
+		public void testBuildMimeMessage2() throws Exception {
+			
+			
+			email.setHostName("host1");
+			email.setSmtpPort(8080);
+			
+			email.addTo("toTest@test.com");
+			email.setSubject("test mail");
+			email.setSslSmtpPort("port1");
+			email.setBounceAddress("testBounce@test.com");
+			email.updateContentType("type"); 
+			
+			email.emailBody = new MimeMultipart();
+			
+					 
+			email.buildMimeMessage();
+			
+			MimeMessage msg = email.getMimeMessage();
+			msg.saveChanges();
+			
+			
+			Address[] fromMsg= msg.getFrom();
+			String subjectMsg = msg.getSubject();
+			
+			
+			assertEquals(fromMsg, null);
+			
+			
+		}
+		
+			//test build mime message
+			//test that the "to" email works as expected when null
+			@Test
+			public void testBuildMimeMessage3() throws Exception {
+		
+			email.setHostName("host1");
+			email.setSmtpPort(8080);
+			email.setFrom("test@test.com");
+			email.setSubject("test mail");
+			email.setSslSmtpPort("port1");
+			email.setBounceAddress("testBounce@test.com");
+		
+					 
+			email.buildMimeMessage();
+			
+			MimeMessage msg = email.getMimeMessage();
+			msg.saveChanges();
+			
+		
+			Address[] toMsg= msg.getReplyTo();
+			String subjectMsg = msg.getSubject();
+			
+			
+			assertEquals(toMsg, null);
+			
+		}
+		
+			//test build mime message with content and email body
+		    @Test
+			public void testBuildMimeMessage4() throws Exception {
+			
+			email.setHostName("host1");
+			email.setSmtpPort(8080);
+			email.addTo("toTest@test.com");
+			email.setSubject("test mail");
+			email.setSslSmtpPort("port1");
+			email.setBounceAddress("testBounce@test.com");
+			email.updateContentType("type"); 
+			
+			email.content = new Object();
+			email.emailBody = new MimeMultipart();
+				 
+			email.buildMimeMessage();
+			
+			}
+		
+			//test build mime message with null content
+			@Test
+			public void testBuildMimeMessage5() throws Exception {
+			
+			email.setHostName("host1");
+			email.setSmtpPort(8080);
+			email.addTo("toTest@test.com");
+			email.setSubject("test mail");
+			email.setSslSmtpPort("port1");
+			email.setBounceAddress("testBounce@test.com");
+			email.updateContentType("type"); 
+			
+			
+			email.emailBody = new MimeMultipart();
+			email.contentType = null;
+			
+					 
+			email.buildMimeMessage();
+			
+			}
+
+		
+		//Expect IllegalStateException in build mime message method
+		@Test(expected = IllegalStateException.class)
+		public void testBuildMimeMessageException() throws Exception {
+		
+			javax.mail.Session aSession = null;
+			email.message = email.createMimeMessage(aSession);
+			
+			email.buildMimeMessage();
+			
+		}
+		
 		
 	
 	
