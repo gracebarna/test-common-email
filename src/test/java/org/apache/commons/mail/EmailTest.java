@@ -317,6 +317,19 @@ public class EmailTest {
 			
 		}
 		
+		//test that the host name is retrieved correctly
+		@Test
+		public void testGetHostName() throws Exception {
+			
+			assertEquals(null, email.getHostName());
+			
+			String expectHost = "Host1";
+			email.hostName = "Host1";
+			
+
+			assertEquals(expectHost, email.getHostName());
+		}
+		
 		
 	
 	
