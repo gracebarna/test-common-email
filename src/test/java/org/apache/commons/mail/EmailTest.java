@@ -116,6 +116,46 @@ public class EmailTest {
 				
 	}
 	
+	//test addHeader method
+		//add a header, check to see that header is added
+	    //1 header added in this case
+		@Test
+		public void testAddHeader1() throws Exception {
+			
+			email.addHeader("name", "value");
+			
+			assertEquals(1, email.headers.size());
+			
+		}
+
+		//test addHeader method
+		//add a header, check to see that header is added
+	    //3 headers added in this case
+		@Test
+		public void testAddHeader2() throws Exception {
+			
+			email.addHeader("name1", "value1");
+			email.addHeader("name2", "value2");
+			email.addHeader("name3", "value3");
+			
+			assertEquals(3, email.headers.size());
+			
+		}
+		
+		//Expect IllegalArgumentException when there is no name in the header
+		@Test(expected=IllegalArgumentException.class)
+		public void testAddHeaderNullName() throws Exception {
+			
+			email.addHeader(null, "value");
+			
+		}
+		
+		//Expect IllegalArgumentException when there is no value in the header
+		@Test(expected=IllegalArgumentException.class)
+		public void testAddHeaderNullValue() throws Exception {
+			
+			email.addHeader("Name", null);
+		}
 	
 		
 		
