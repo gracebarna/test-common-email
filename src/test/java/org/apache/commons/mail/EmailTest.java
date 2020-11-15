@@ -364,6 +364,21 @@ public class EmailTest {
 			
 		}
 
+		
+		//test the date that the email is sent
+		@Test
+		public void testGetSentDate() throws Exception {
+			
+			email.sentDate = null;
+			
+			assertEquals(new Date(), email.getSentDate());
+			
+			Date date = new Date();
+			email.setSentDate(date);
+			
+			assertEquals(new Date(email.sentDate.getTime()), email.getSentDate());
+			
+		}
 	
 	
 	
